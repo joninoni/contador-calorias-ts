@@ -14,16 +14,21 @@ const Form = () => {
 
         const isNumberField = ["categories","calories"].includes(e.target.id)//es para saber cual campo dispara el evento si es el campo de categories o calories
 
-        console.log(isNumberField);
-        
         setActivity({
             ...activity,
             [e.target.id] : isNumberField ? +e.target.value: e.target.value
         })
     }
 
+    const isValidActivity = () => {
+        const {calories,name} = activity
+        return name.trim() !== "" && calories > 0
+    }
+
     return (
-        <form className="space-y-5 bg-white shadow p-10 rounded-lg">
+        <form
+            className="space-y-5 bg-white shadow p-10 rounded-lg"   
+        >
 
             <div className="grid grid-cols-1 gap-3">
                 <label htmlFor="category" className="font-bold">Categoria:</label>
@@ -68,8 +73,9 @@ const Form = () => {
             
             <input
                 type="submit"
-                className="bg-gray-800 hover:bg-gray-900 w-full p-2 font-bold uppercase text-white cursor-pointer"
+                className="bg-gray-800 hover:bg-gray-900 w-full p-2 font-bold uppercase text-white cursor-pointer disabled:opacity-10"
                 value="Guardar Comida O Guardar Ejercicio"
+                disabled={!isValidActivity()}
             />
         </form>
     )

@@ -10,6 +10,7 @@ type FormProps = {
 const Form = ({dispatch} : FormProps) => {
 
     const initialState = {
+        id : crypto.randomUUID(),
         category : 1,
         name: "",
         calories: 0,
@@ -36,7 +37,10 @@ const Form = ({dispatch} : FormProps) => {
         e.preventDefault()
         dispatch({type:"save-activity",payload:{newActivity:activity}})
         //resetear el formulario
-        setActivity(initialState)
+        setActivity({
+            ...initialState,
+            id: crypto.randomUUID()
+        })
     }
 
     return (

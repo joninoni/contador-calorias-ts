@@ -1,4 +1,4 @@
-import { useState,ChangeEvent,FormEvent, Dispatch } from "react"
+import { useState,ChangeEvent,FormEvent, Dispatch} from "react"
 import { categories } from "../data/categories"
 import { Activity } from "../types"
 import { ActivityActions } from "../reducers/activityReducer"
@@ -8,11 +8,14 @@ type FormProps = {
 }
 
 const Form = ({dispatch} : FormProps) => {
-    const [activity,setActivity] = useState <Activity>({
+
+    const initialState = {
         category : 1,
         name: "",
         calories: 0,
-    })
+    }
+
+    const [activity,setActivity] = useState <Activity>(initialState)
 
     const handleChange =( e : ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>) => {
 
@@ -32,6 +35,8 @@ const Form = ({dispatch} : FormProps) => {
     const handleSubmit =( e : FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         dispatch({type:"save-activity",payload:{newActivity:activity}})
+        //resetear el formulario
+        setActivity(initialState)
     }
 
     return (
@@ -45,6 +50,7 @@ const Form = ({dispatch} : FormProps) => {
                 <select 
                     id="category"
                     className="border border-slate-300 p-2 rounded-lg w-full bg-white"
+                    value={activity.category}
                     onChange={handleChange}
                 >
                    {categories.map ( category =>(
@@ -66,7 +72,8 @@ const Form = ({dispatch} : FormProps) => {
                     type="text"
                     className="border border-slate-300 rounded-lg p-2"
                     placeholder="Ejem. Comida, Jugo de Naranga, Ensalada, Ejercicio, Pesas, Bicicleta"
-                    onChange={handleChange}
+                    value={activity.name}
+                    onChange={handleChange}               
                 />
             </div>
 
@@ -77,6 +84,7 @@ const Form = ({dispatch} : FormProps) => {
                     type="number"
                     className="border border-slate-300 rounded-lg p-2"
                     placeholder="Calorias ejemplo. 300 o 500"
+                    value={activity.calories}
                     onChange={handleChange}
                 />
             </div>

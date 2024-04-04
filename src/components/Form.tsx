@@ -3,7 +3,6 @@ import { categories } from "../data/categories"
 import { Activity } from "../types"
 
 const Form = () => {
-
     const [activity,setActivity] = useState <Activity>({
         category : 1,
         name: "",
@@ -28,6 +27,7 @@ const Form = () => {
     const handleSubmit =( e : FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         console.log("validando...")
+
     }
 
     return (

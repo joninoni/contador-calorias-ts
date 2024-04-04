@@ -2,7 +2,7 @@ import {Activity} from "../types"
 
 
 export type ActivityActions = {
-   
+   type: "save-activity", payload : {newActivity : Activity}
 }
 
 
@@ -13,11 +13,17 @@ export const initialState : ActivityState = {
     activities:[]
 }
 
-const activityReducer = (
+export const activityReducer = (
    state : ActivityState = initialState,
-   action : ActivityActions 
+   action : ActivityActions
 ) => {
-    
+    if(action.type === "save-activity") {
+        return {
+            ...state,
+            activities : [...state.activities,action.payload.newActivity]
+        }        
+    }
+    return state
 }
 
 export default activityReducer

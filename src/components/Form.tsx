@@ -20,11 +20,11 @@ const Form = ({dispatch} : FormProps) => {
 
     const handleChange =( e : ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>) => {
 
-        const isNumberField = ["categories","calories"].includes(e.target.id)//es para saber cual campo dispara el evento si es el campo de categories o calories
+        const isNumberField = ["category","calories"].includes(e.target.id)//es para saber cual campo dispara el evento si es el campo de categories o calories
 
         setActivity({
             ...activity,
-            [e.target.id] : isNumberField ? +e.target.value: e.target.value
+            [e.target.id]: isNumberField ? +e.target.value : e.target.value
         })
     }
 
@@ -60,7 +60,7 @@ const Form = ({dispatch} : FormProps) => {
                    {categories.map ( category =>(
                         <option 
                             key={category.id}
-                            value={category.name}
+                            value={category.id}
                         >
                                 {category.name}
                         </option>

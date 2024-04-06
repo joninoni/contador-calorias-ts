@@ -1,13 +1,14 @@
-import { useState,ChangeEvent,FormEvent, Dispatch} from "react"
+import { useState,ChangeEvent,FormEvent, Dispatch, useEffect} from "react"
 import { categories } from "../data/categories"
 import { Activity } from "../types"
-import { ActivityActions } from "../reducers/activityReducer"
+import { ActivityActions, ActivityState } from "../reducers/activityReducer"
 
 type FormProps = {
     dispatch : Dispatch<ActivityActions>
+    state : ActivityState
 }
 
-const Form = ({dispatch} : FormProps) => {
+const Form = ({dispatch,state} : FormProps) => {
 
     const initialState = {
         id : crypto.randomUUID(),
@@ -17,6 +18,13 @@ const Form = ({dispatch} : FormProps) => {
     }
 
     const [activity,setActivity] = useState <Activity>(initialState)
+
+    useEffect( () => {
+        if(state.activityId){
+            const selectActivity = state.activities.filter( stateActivity => stateActivity.id === state.activityId)[0]
+            setActivity(selectActivity)
+        }
+    },[state.activities,state.activityId])
 
     const handleChange =( e : ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>) => {
 

@@ -42,7 +42,7 @@ const Form = ({dispatch,state} : FormProps) => {
     }
 
     const handleSubmit =( e : FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
+        e.preventDefault()     
         dispatch({type:"save-activity",payload:{newActivity:activity}})
         //resetear el formulario
         setActivity({

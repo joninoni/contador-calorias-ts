@@ -9,7 +9,6 @@ type FormProps = {
 }
 
 const Form = ({dispatch,state} : FormProps) => {
-
     const initialState = {
         id : crypto.randomUUID(),
         category : 1,

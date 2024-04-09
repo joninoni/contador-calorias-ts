@@ -50,7 +50,9 @@ export const activityReducer = (
     }
 
     if(action.type === "delete-activity"){
+        
             return{
+                ...state,
                 activities : state.activities.filter( activity => activity.id !== action.payload.id)
             }
     }

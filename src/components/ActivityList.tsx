@@ -2,11 +2,11 @@ import { useMemo,Dispatch} from "react"
 import {PencilSquareIcon,TrashIcon} from "@heroicons/react/24/outline"
 import { Activity } from "../types"
 import { categories } from "../data/categories"
-import { ActivityActions } from "../reducers/activityReducer"
+import { ActivityActions} from "../reducers/activityReducer"
 
 type ActivityListProps = {
-  activities : Activity[]
-  dispatch : Dispatch<ActivityActions>   
+    activities : Activity[]
+    dispatch : Dispatch<ActivityActions>   
 }
 
 const ActivityList = ({activities,dispatch} : ActivityListProps) => {
@@ -46,7 +46,7 @@ const ActivityList = ({activities,dispatch} : ActivityListProps) => {
                             </button>
     
                             <button
-                                onClick={() => dispatch( {type:"delete-activity",payload:{id:activity.id}}) }
+                                onClick={() => dispatch( {type:"delete-activity",payload:{id:activity.id}})}
                             >
                                 <TrashIcon
                                     className="h-8 w-8 text-red-800"
